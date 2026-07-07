@@ -20,6 +20,10 @@ SECRET_KEY = "django-insecure-e4-8vg3xtiq*^#8#d53ujt^f3x@a2h=oshva^)x=()1)b0q9(^
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS mela irukum, adhuku keela idha sethuko da thalaiva:
+CSRF_TRUSTED_ORIGINS = [
+    "https://expense-tracker-frontend-tfnm.vercel.app",
+]
 
 
 # Application definition
