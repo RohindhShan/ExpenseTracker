@@ -20,10 +20,6 @@ SECRET_KEY = "django-insecure-e4-8vg3xtiq*^#8#d53ujt^f3x@a2h=oshva^)x=()1)b0q9(^
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS mela irukum, adhuku keela idha sethuko da thalaiva:
-CSRF_TRUSTED_ORIGINS = [
-    "https://expense-tracker-frontend-tfnm.vercel.app",
-]
 
 
 # Application definition
@@ -45,7 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # Top-la dhaan irukanum, perfect da!
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,8 +52,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# 🔥 PRASHANAI FIX: Pathiya, ALL ORIGINS active aaganum-na conflict aaguradha completely eduthutaen da nanba!
+# PC Global Operations Configuration Matrix
 CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://expense-tracker-frontend-tfnm.vercel.app",
+]
 
 ROOT_URLCONF = "backend.urls"
 
@@ -80,8 +80,6 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -91,26 +89,17 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
