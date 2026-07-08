@@ -55,8 +55,10 @@ MIDDLEWARE = [
 # PC Global Operations Configuration Matrix
 CORS_ALLOW_ALL_ORIGINS = True
 
+
 CSRF_TRUSTED_ORIGINS = [
     "https://expense-tracker-frontend-tfnm.vercel.app",
+    "https://expensetracker-production-c04c.up.railway.app",  
 ]
 
 ROOT_URLCONF = "backend.urls"
