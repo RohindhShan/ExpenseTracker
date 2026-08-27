@@ -24,6 +24,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+# 1. INSTALLED_APPS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -31,17 +32,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Third party
+    'corsheaders',                  # <- Must be present
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
-    # Our apps
     'accounts',
     'expenses',
 ]
 
+# 2. MIDDLEWARE (CorsMiddleware MUST be at the very top)
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # <- Must be the first item
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,14 +52,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# PC Global Operations Configuration Matrix
+# 3. CORS & CSRF Settings (Add at the bottom of settings.py)
 CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.vercel.app",
     "https://expensetracker-cowu.onrender.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
+
+
 
 ROOT_URLCONF = "backend.urls"
 
