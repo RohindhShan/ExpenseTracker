@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://expensetracker-cowu.onrender.com";
+
 function Login({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -9,13 +14,10 @@ function Login({ setToken }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://expensetracker-cowu.onrender.com/api/auth/login/",
-        {
-          username,
-          password,
-        },
-      );
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login/`, {
+        username,
+        password,
+      });
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
     } catch (err) {

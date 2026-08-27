@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Dashboard from "./components/Dashboard";
 
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://expensetracker-cowu.onrender.com";
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem("userToken") || "");
   const [isRegistering, setIsRegistering] = useState(false);
@@ -10,14 +15,11 @@ function App() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://expensetracker-cowu.onrender.com/api/auth/login/",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        },
-      );
+      const response = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
       const data = await response.json();
       if (response.ok && data.token) {
         localStorage.setItem("userToken", data.token);
@@ -35,14 +37,11 @@ function App() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://expensetracker-cowu.onrender.com/api/auth/register/",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        },
-      );
+      const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
       const data = await response.json();
       if (response.ok) {
         alert("Account Created successfully! Please login.");

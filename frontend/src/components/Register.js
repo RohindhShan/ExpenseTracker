@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://expensetracker-cowu.onrender.com";
+
 function Register({ setActiveTab }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -11,18 +16,13 @@ function Register({ setActiveTab }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Django project accounts register URL endpoint da!
-      await axios.post(
-        "https://expensetracker-cowu.onrender.com/api/auth/register/",
-        {
-          username,
-          email,
-          password,
-        },
-      );
-      setMessage("Account created successfully! Now,You can Login");
+      await axios.post(`${API_BASE_URL}/api/auth/register/`, {
+        username,
+        email,
+        password,
+      });
+      setMessage("Account created successfully! Now, You can Login");
       setError("");
-      // 3 seconds-ku apram automatic-ah login screen-ku kootitu poidum da
       setTimeout(() => setActiveTab("login"), 3000);
     } catch (err) {
       setError("You can't Register, username already exists!");

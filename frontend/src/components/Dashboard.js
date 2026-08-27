@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 
+// Auto switches between local and render backend
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://expensetracker-cowu.onrender.com";
+
 function Dashboard({ token, handleLogout }) {
   const [transactions, setTransactions] = useState([]);
   const [categories] = useState([
@@ -19,16 +25,13 @@ function Dashboard({ token, handleLogout }) {
 
   const fetchLedgerData = async () => {
     try {
-      const response = await fetch(
-        "https://expensetracker-cowu.onrender.com/api/expenses/",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
+      const response = await fetch(`${API_BASE_URL}/api/expenses/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
         },
-      );
+      });
       if (response.ok) {
         const data = await response.json();
         setTransactions(data);
@@ -55,22 +58,21 @@ function Dashboard({ token, handleLogout }) {
     };
 
     try {
-      const response = await fetch(
-        "https://expensetracker-cowu.onrender.com/api/expenses/",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+      const response = await fetch(`${API_BASE_URL}/api/expenses/`, {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(payload),
+      });
 
       if (response.ok) {
         setTitle("");
         setAmount("");
         fetchLedgerData();
+      } else {
+        alert("Server rejected the record. Check required fields.");
       }
     } catch (err) {
       alert("Database matrix record upload failed.");
