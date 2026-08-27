@@ -13,7 +13,7 @@ function Register({ setActiveTab }) {
     try {
       // Django project accounts register URL endpoint da!
       await axios.post(
-        "https://expensetracker-production-c04c.up.railway.app/api/accounts/register/",
+        "https://expensetracker-cowu.onrender.com/api/auth/register/",
         {
           username,
           email,

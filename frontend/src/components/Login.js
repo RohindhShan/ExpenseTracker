@@ -10,7 +10,7 @@ function Login({ setToken }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://expensetracker-production-c04c.up.railway.app/api/accounts/login/",
+        "https://expensetracker-cowu.onrender.com/api/auth/login/",
         {
           username,
           password,

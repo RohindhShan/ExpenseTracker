@@ -23,7 +23,7 @@ function Dashboard({ token, handleLogout }) {
   const fetchExpenses = async () => {
     try {
       const response = await axios.get(
-        "https://expensetracker-production-c04c.up.railway.app/api/expenses/",
+        "https://expensetracker-cowu.onrender.com/api/expenses/",
         config,
       );
       setExpenses(response.data);

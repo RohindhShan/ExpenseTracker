@@ -130,14 +130,11 @@ function AuthWrapper({ setToken }) {
     const targetEndpoint = isLoginView ? "login" : "register";
 
     try {
-      const response = await fetch(
-        `https://expensetracker-production-c04c.up.railway.app/api/accounts/${targetEndpoint}/`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        },
-      );
+      const response = await fetch(`https://expensetracker-cowu.onrender.com`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
       const data = await response.json();
 
