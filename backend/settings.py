@@ -58,7 +58,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://expense-tracker-frontend-tfnm.vercel.app",
-    "https://expensetracker-production-c04c.up.railway.app",  
+    "https://YOUR-RENDER-URL.onrender.com",  # Paste your render URL here
 ]
 
 ROOT_URLCONF = "backend.urls"

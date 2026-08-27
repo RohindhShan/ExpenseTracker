@@ -23,7 +23,7 @@ function Dashboard({ token, handleLogout }) {
   const fetchExpenses = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/expenses/",
+        "https://expensetracker-production-c04c.up.railway.app/api/expenses/",
         config,
       );
       setExpenses(response.data);
@@ -36,6 +36,7 @@ function Dashboard({ token, handleLogout }) {
 
   useEffect(() => {
     fetchExpenses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Event handler adding new transactional element to backend engine
@@ -43,7 +44,7 @@ function Dashboard({ token, handleLogout }) {
     e.preventDefault();
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/expenses/",
+        "https://expensetracker-production-c04c.up.railway.app/api/expenses/",
         { title, amount: parseFloat(amount), category },
         config,
       );
@@ -60,7 +61,10 @@ function Dashboard({ token, handleLogout }) {
   // Erasing capability workflow handling physical deletion from database architecture
   const handleDeleteExpense = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/expenses/${id}/`, config);
+      await axios.delete(
+        `https://expensetracker-production-c04c.up.railway.app/api/expenses/${id}/`,
+        config,
+      );
       fetchExpenses(); // Recomputes structural values on database feedback signal
     } catch (err) {
       alert(

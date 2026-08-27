@@ -12,11 +12,14 @@ function Register({ setActiveTab }) {
     e.preventDefault();
     try {
       // Django project accounts register URL endpoint da!
-      await axios.post("http://127.0.0.1:8000/api/accounts/register/", {
-        username,
-        email,
-        password,
-      });
+      await axios.post(
+        "https://expensetracker-production-c04c.up.railway.app/api/accounts/register/",
+        {
+          username,
+          email,
+          password,
+        },
+      );
       setMessage("Account created successfully! Now,You can Login");
       setError("");
       // 3 seconds-ku apram automatic-ah login screen-ku kootitu poidum da
